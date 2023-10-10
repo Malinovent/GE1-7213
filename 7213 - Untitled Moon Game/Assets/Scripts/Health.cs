@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
@@ -8,8 +9,13 @@ public class Health : MonoBehaviour
 
     private int _currentHealth;
 
+    [SerializeField] UnityEvent onTakeDamage;
+    [SerializeField] UnityEvent onGainHealth;
+
+    public int CurrentHealth => _currentHealth;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _currentHealth = maxHealth;
     }
@@ -19,10 +25,20 @@ public class Health : MonoBehaviour
         _currentHealth -= damage;
 
         _currentHealth = Mathf.Clamp(_currentHealth, 0, maxHealth);
-        Debug.Log(this.gameObject.name + " Took " + damage + " damage. Remaining health " + _currentHealth);
+        //Debug.Log(this.gameObject.name + " Took " + damage + " damage. Remaining health " + _currentHealth);
         if(_currentHealth <= 0)
         {
             Destroy(this.gameObject);
         }
+
+        onTakeDamage?.Invoke();
+    }
+
+    public void GainHealth(int amount)
+    {
+        _currentHealth += amount;
+        _currentHealth = Mathf.Clamp(_currentHealth, 0, maxHealth);
+
+        onGainHealth?.Invoke();
     }
 }
