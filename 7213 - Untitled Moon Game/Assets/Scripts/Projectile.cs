@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mali.Audio;
 
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private float vitesse = 3;
     [SerializeField] private float lifetimeInSeconds = 10;
     [SerializeField] private int damage = 5;
+    [SerializeField] private string audioClipName = "fireball";
+    [SerializeField] private ParticleSystem particles;
 
     private Rigidbody2D rb;
 
@@ -22,30 +25,18 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //1. Tag
-        //2. Trouver dans les dossier (Fait pas)
-        //3. Layer
-        //4. Name
-        //5. ????
-
         //Strategy 2
         Health health = collision.GetComponent<Health>();
 
         if(health)
         {
             health.TakeDamage(damage);
+            AudioManager.Singleton.PlayAudio(audioClipName);
+            GameObject go = Instantiate(particles.gameObject);
+            go.transform.position = this.transform.position;
+            Destroy(go, 2);
             Destroy(this.gameObject);
         }
-
-        
-        /*
-        //Strategy 1
-        if (collision.CompareTag("Enemy"))
-        {
-            collision.GetComponent<Health>().TakeDamage(damage);
-            Destroy(this.gameObject);
-        }*/
-
     }
 
 }

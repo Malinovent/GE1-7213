@@ -28,7 +28,10 @@ public class Health : MonoBehaviour
         //Debug.Log(this.gameObject.name + " Took " + damage + " damage. Remaining health " + _currentHealth);
         if(_currentHealth <= 0)
         {
-            Destroy(this.gameObject);
+            CameraController.Singleton.ChangeCible(this.transform);
+            //Destroy(this.gameObject);
+            TimeManager.Singleton.TimeSlow(0.1f, 2);
+            gameObject.SetActive(false);
         }
 
         onTakeDamage?.Invoke();

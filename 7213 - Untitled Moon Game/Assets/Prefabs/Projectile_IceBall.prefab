@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8281190685561476097}
   - component: {fileID: 549579819416261495}
   m_Layer: 7
-  m_Name: Projectile
+  m_Name: Projectile_IceBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,9 +75,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: e0b16a377f17da741be514a884ceeca3, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.10808115, g: 0.56845194, b: 0.6226415, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -164,3 +164,5 @@ MonoBehaviour:
   vitesse: 3
   lifetimeInSeconds: 10
   damage: 5
+  audioClipName: iceball
+  particles: {fileID: 2081312590474965104, guid: 587a66ae5fbc12345801eb012efadeee, type: 3}

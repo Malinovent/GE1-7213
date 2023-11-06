@@ -5,20 +5,28 @@ using Mali.Audio;
 
 public class SoundTest : MonoBehaviour
 {
+    [SerializeField] ParticleSystem particles;
+
        // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.T))
         {
             //Play Fire Ball
-            AudioManager.Singleton.PlayAudio("fireBall");
+            AudioManager.Singleton.PlayAudio("fireball");
         }
 
         if(Input.GetKeyDown(KeyCode.Y))
         {
             //Play Ice Ball
-            AudioManager.Singleton.PlayAudio("iceBall");
+            AudioManager.Singleton.PlayAudio("iceball");
         }
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            particles.Play();
+        }
+
         
     }
 }

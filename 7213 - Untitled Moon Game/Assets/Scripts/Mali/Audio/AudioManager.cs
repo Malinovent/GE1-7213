@@ -24,7 +24,8 @@ namespace Mali.Audio
         }
         #endregion
 
-        [SerializeField] private AudioClip[] audioClips;
+        //[SerializeField] private AudioClip[] audioClips;
+        [SerializeField] private SoundEffect[] soundEffects;
 
         private List<AudioSource> audioSources = new List<AudioSource>();
 
@@ -69,17 +70,21 @@ namespace Mali.Audio
 
         public void PlayAudio(string audioClipName)
         {
-            switch(audioClipName)
+            foreach (SoundEffect sfx in soundEffects)
             {
-                case "fireBall":
-                    //Logic play fireball
-                    PlayAudio(audioClips[0]);
-                    break;
-                case "iceBall":
-                    //Logic play iceball
-                    PlayAudio(audioClips[1]);
-                    break;
+                if(sfx.nom == audioClipName)
+                {
+                    PlayAudio(sfx.audioClip);
+                    return;
+                }
             }
         }
+    }
+
+    [System.Serializable]
+    public struct SoundEffect
+    {
+        public string nom;
+        public AudioClip audioClip;
     }
 }
